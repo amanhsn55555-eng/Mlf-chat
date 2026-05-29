@@ -1122,16 +1122,20 @@
 <div id="toastMsg"></div>
 
 <script type="module">
+  // ========== استخدام نفس Firebase Config من صفحة التسجيل ==========
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
-  import { getAuth, signOut, onAuthStateChanged, updatePassword, EmailAuthProvider, reauthenticateWithCredential } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
+  import { getAuth, signOut, onAuthStateChanged, updatePassword, updateEmail, EmailAuthProvider, reauthenticateWithCredential } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
   import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, query, getDocs, addDoc, arrayRemove, arrayUnion } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
 
+  // نفس الإعدادات من صفحة Bage-1-chat
   const firebaseConfig = {
-    apiKey: "AIzaSyDYKCCTcurNcJslrNKqdiJCoIIK-YZArB4",
-    authDomain: "sbaq-fc46f.firebaseapp.com",
-    projectId: "sbaq-fc46f",
-    storageBucket: "sbaq-fc46f.firebasestorage.app",
-    appId: "1:1026865750415:web:0ee39a717bcafaa0d06bfa"
+    apiKey: "AIzaSyCPBrZMo6IYCwCDYV3HEfNcUmLUITR6VRc",
+    authDomain: "elahbes.firebaseapp.com",
+    projectId: "elahbes",
+    storageBucket: "elahbes.firebasestorage.app",
+    messagingSenderId: "800207969145",
+    appId: "1:800207969145:web:aa19b725d1c92dd48fada8",
+    measurementId: "G-EFT566SJMP"
   };
 
   const app = initializeApp(firebaseConfig);
@@ -1179,11 +1183,9 @@
     document.getElementById('oilAmount').textContent = resources.oil || 0;
   }
 
-  // ========== دالة تحديث الواجهة بالبيانات ==========
   function updateUIWithData(userData) {
     if (!userData) return;
     
-    // تحديث الصورة الرمزية
     const avatarLarge = document.getElementById('profileAvatarLarge');
     if (avatarLarge) {
       const frameColor = userData.colors?.frame || '#fbbf24';
@@ -1196,36 +1198,28 @@
       }
     }
     
-    // تحديث المعرف
     document.getElementById('profileIdBadge').innerHTML = 
       `<i class="fas fa-id-card"></i> #${userData.userId || '000000'}`;
     
-    // تحديث الحقول
     document.getElementById('editUsername').value = userData.username || '';
     document.getElementById('editEmail').value = userData.email || '';
     document.getElementById('editBio').value = userData.bio || '';
     document.getElementById('editRelationship').value = userData.relationship || 'اعزب';
     
-    // تحديث الألوان
     document.getElementById('editFrameColor').value = userData.colors?.frame || '#fbbf24';
     document.getElementById('editNameColor').value = userData.colors?.name || '#0f172a';
     document.getElementById('editIdColor').value = userData.colors?.id || '#8b5cf6';
     document.getElementById('editPostTextColor').value = userData.colors?.postText || '#334155';
     document.getElementById('editCommentTextColor').value = userData.colors?.commentText || '#475569';
     
-    // تحديث الخصوصية
     document.getElementById('privacyToggle').checked = userData.isPrivate || false;
     updatePrivacyStatus();
     
-    // تحديث الصورة المختارة
     selectedAvatarType = userData.avatarType || 'emoji';
     selectedAvatarValue = userData.avatarUrl || userData.emoji || '😎';
     renderAvatarSelector();
     
-    // تحديث زر الدعوة
     toggleInviteButton();
-    
-    console.log('✅ تم تحديث الواجهة بالبيانات:', userData.username);
   }
 
   function updateUI() {
@@ -1545,7 +1539,7 @@
 
   window.saveAllChanges = async function() {
     if (!currentUser) {
-      showToast('يجب تسجيل الدخول', false);
+      showToast('يجب تسجيل الدخول للحفظ', false);
       return;
     }
     
@@ -1575,7 +1569,8 @@
       const newEmail = document.getElementById('editEmail')?.value.trim();
       if (newEmail && newEmail !== currentUser.email) {
         try {
-          await currentUser.updateEmail(newEmail);
+          await updateEmail(currentUser, newEmail);
+          currentUserData.email = newEmail;
           showToast('✅ تم تحديث البريد الإلكتروني');
         } catch (error) {
           showToast('❌ فشل تحديث البريد: ' + error.message, false);
@@ -1620,7 +1615,7 @@
       
       await setDoc(doc(db, "users", currentUser.uid), currentUserData, { merge: true });
       
-      // حفظ في localStorage للمزامنة الفورية
+      // حفظ في localStorage للمزامنة
       localStorage.setItem('currentUserData', JSON.stringify(currentUserData));
       
       updateUI();
@@ -1634,11 +1629,10 @@
 
   window.handleLogout = async function() {
     try {
-      // مسح البيانات المحلية
       localStorage.removeItem('currentUserData');
       await signOut(auth);
       showToast('تم تسجيل الخروج بنجاح');
-      setTimeout(() => window.location.reload(), 1500);
+      setTimeout(() => window.location.href = 'https://amanhsn55555-eng.github.io/Bage-1-chat/', 1500);
     } catch (error) {
       showToast('خطأ في تسجيل الخروج', false);
     }
@@ -1648,20 +1642,14 @@
   window.openModal = openModal;
   window.showToast = showToast;
 
-  // ========== تحميل البيانات من localStorage فوراً ==========
   function loadLocalDataImmediately() {
     try {
       const savedData = localStorage.getItem('currentUserData');
       if (savedData) {
         const userData = JSON.parse(savedData);
         console.log('📦 تم تحميل البيانات المحلية:', userData.username);
-        
-        // تحديث الواجهة مباشرة
         updateUIWithData(userData);
-        
         return userData;
-      } else {
-        console.log('⚠️ لا توجد بيانات محفوظة في localStorage');
       }
     } catch (error) {
       console.error('❌ خطأ في تحميل البيانات المحلية:', error);
@@ -1674,39 +1662,34 @@
       currentUser = user;
       console.log('👤 تم تسجيل الدخول:', user.email);
       
-      // تحميل البيانات من السيرفر
       await loadUserData(user.uid);
       
       if (!currentUserData?.userId) {
         const userId = user.uid.slice(0, 6);
-        currentUserData = { ...currentUserData, userId: userId };
+        currentUserData = { ...currentUserData, userId: userId, email: user.email };
         await setDoc(doc(db, "users", user.uid), currentUserData, { merge: true });
       }
       
-      // حفظ البيانات في localStorage
+      // حفظ البيانات مع البريد الإلكتروني
       if (currentUserData) {
+        currentUserData.email = user.email;
         localStorage.setItem('currentUserData', JSON.stringify(currentUserData));
       }
     } else {
-      console.log('⚠️ لم يتم تسجيل الدخول - محاولة تحميل البيانات المحلية');
-      
-      // تحميل البيانات من localStorage حتى لو لم يكن مسجل دخول
+      console.log('⚠️ لم يتم تسجيل الدخول');
       const localData = loadLocalDataImmediately();
       if (localData) {
         currentUserData = localData;
-        updateUIWithData(localData);
-        showToast('📂 تم تحميل البيانات المحلية');
+        showToast('📂 تم تحميل البيانات المحلية - سجل دخول للحفظ');
       } else {
         showToast('يرجى تسجيل الدخول', false);
       }
     }
   });
 
-  // تحميل البيانات المحلية فور تحميل الصفحة
   window.addEventListener('load', () => {
     console.log('🔄 جاري تحميل الصفحة...');
     
-    // تحميل البيانات من localStorage فوراً
     loadLocalDataImmediately();
     
     document.querySelectorAll('.close-btn').forEach(btn => {
@@ -1725,7 +1708,6 @@
       if (e.target === this) this.classList.remove('active');
     });
     
-    // الاستماع لتغييرات localStorage من الصفحات الأخرى
     window.addEventListener('storage', (e) => {
       if (e.key === 'currentUserData' && e.newValue) {
         console.log('🔄 تم تحديث البيانات من صفحة أخرى');
