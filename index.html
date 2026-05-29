@@ -260,7 +260,6 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* ========== هيدر علوي ========== */
     .compact-header {
       position: fixed;
       top: 0;
@@ -324,7 +323,6 @@
       margin-right: 2px; 
     }
 
-    /* ========== المحتوى الرئيسي ========== */
     .app-container {
       padding: 10px 12px;
       max-width: 560px;
@@ -332,7 +330,6 @@
       margin-top: 90px;
     }
 
-    /* ========== بطاقة الملف الشخصي ========== */
     .profile-card {
       background: #ffffff;
       border-radius: 24px;
@@ -418,7 +415,6 @@
       font-size: 14px;
     }
 
-    /* ========== حقول التعديل ========== */
     .edit-fields-container {
       display: flex;
       flex-direction: column;
@@ -490,7 +486,6 @@
       padding-left: 30px;
     }
 
-    /* ========== أزرار خاصة ========== */
     .action-buttons-row {
       display: flex;
       gap: 10px;
@@ -577,7 +572,6 @@
       background: #fef2f2;
     }
 
-    /* ========== قسم الخصوصية ========== */
     .privacy-section {
       background: #f8fafc;
       border-radius: 16px;
@@ -658,7 +652,6 @@
       font-weight: 600;
     }
 
-    /* ========== قسم الألوان ========== */
     .colors-section {
       background: #f8fafc;
       border-radius: 16px;
@@ -701,7 +694,6 @@
       padding: 2px;
     }
 
-    /* ========== قسم الصورة الرمزية ========== */
     .avatar-options-popup {
       display: none;
       position: fixed;
@@ -791,7 +783,6 @@
       color: #475569;
     }
 
-    /* ========== إشعار ========== */
     #toastMsg {
       position: fixed;
       bottom: 30px;
@@ -815,7 +806,6 @@
     
     #toastMsg.show { opacity: 1; }
 
-    /* ========== مودال المتابعين والدعوة ========== */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -962,10 +952,8 @@
 
 <main class="app-container">
   
-  <!-- ========== بطاقة الملف الشخصي الموحدة ========== -->
   <div class="profile-card">
     
-    <!-- صورة الحساب والمعرف -->
     <div class="profile-header-section">
       <div class="profile-avatar-container">
         <div class="profile-avatar-large" id="profileAvatarLarge" style="border-color: #fbbf24;">
@@ -980,10 +968,8 @@
       </div>
     </div>
 
-    <!-- حقول التعديل مرتبة عمودياً -->
     <div class="edit-fields-container">
       
-      <!-- 1. تعديل الاسم -->
       <div class="field-group">
         <div class="field-label">
           <i class="fas fa-user" style="color: #3b82f6;"></i> 📛 الاسم
@@ -991,7 +977,6 @@
         <input type="text" class="field-input" id="editUsername" placeholder="أدخل اسمك">
       </div>
 
-      <!-- 2. تعديل البريد الإلكتروني -->
       <div class="field-group">
         <div class="field-label">
           <i class="fas fa-envelope" style="color: #8b5cf6;"></i> ✉️ البريد الإلكتروني
@@ -999,7 +984,6 @@
         <input type="email" class="field-input" id="editEmail" placeholder="example@email.com">
       </div>
 
-      <!-- 3. تعديل كلمة المرور -->
       <div class="field-group">
         <div class="field-label">
           <i class="fas fa-lock" style="color: #ef4444;"></i> 🔒 كلمة المرور
@@ -1009,7 +993,6 @@
         <input type="password" class="field-input" id="confirmPassword" placeholder="تأكيد كلمة المرور الجديدة">
       </div>
 
-      <!-- 4. تعديل النبذة / السيرة -->
       <div class="field-group">
         <div class="field-label">
           <i class="fas fa-info-circle" style="color: #10b981;"></i> 📝 النبذة التعريفية
@@ -1017,7 +1000,6 @@
         <textarea class="field-input" id="editBio" placeholder="اكتب نبذة عن نفسك..."></textarea>
       </div>
 
-      <!-- 5. تعديل الحالة الاجتماعية + زر دعوة ارتباط -->
       <div class="field-group">
         <div class="field-label">
           <i class="fas fa-heart" style="color: #ec4899;"></i> 💕 الحالة الاجتماعية
@@ -1036,7 +1018,6 @@
         </div>
       </div>
 
-      <!-- 6. أيقونة المتابعين -->
       <div class="field-group" style="cursor: pointer;" onclick="window.showFollowersModal()">
         <div class="field-label">
           <i class="fas fa-users" style="color: #f59e0b;"></i>  المتابعين
@@ -1050,7 +1031,6 @@
         </div>
       </div>
 
-      <!-- 7. إغلاق الخاص / السماح به -->
       <div class="privacy-section">
         <div class="privacy-row">
           <div class="privacy-label">
@@ -1067,7 +1047,6 @@
         </div>
       </div>
 
-      <!-- 8. الألوان وتعديلاتها -->
       <div class="colors-section">
         <div class="section-title">
           <i class="fas fa-palette" style="color: #8b5cf6;"></i> 🎨تخصيص الألوان
@@ -1096,9 +1075,8 @@
 
     </div>
 
-    <!-- أزرار الحفظ والخروج -->
     <button class="btn-gold" style="width: 100%; margin-top: 20px; padding: 16px; font-size: 15px;" onclick="window.saveAllChanges()">
-      <i class="fas fa-save"></i>  
+      <i class="fas fa-save"></i> حفظ جميع التعديلات
     </button>
     
     <button class="btn-danger-outline" onclick="window.handleLogout()">
@@ -1108,7 +1086,6 @@
   </div>
 </main>
 
-<!-- ========== نافذة اختيار الصورة الرمزية ========== -->
 <div class="avatar-options-popup" id="avatarPopup">
   <div class="avatar-popup-content">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
@@ -1132,7 +1109,6 @@
   </div>
 </div>
 
-<!-- ========== نافذة المتابعين ========== -->
 <div class="modal-overlay" id="followersModal">
   <div class="modal-sheet">
     <div class="modal-header">
@@ -1203,45 +1179,58 @@
     document.getElementById('oilAmount').textContent = resources.oil || 0;
   }
 
-  function updateUI() {
-    if (!currentUserData) return;
+  // ========== دالة تحديث الواجهة بالبيانات ==========
+  function updateUIWithData(userData) {
+    if (!userData) return;
     
+    // تحديث الصورة الرمزية
     const avatarLarge = document.getElementById('profileAvatarLarge');
     if (avatarLarge) {
-      const frameColor = currentUserData.colors?.frame || '#fbbf24';
+      const frameColor = userData.colors?.frame || '#fbbf24';
       avatarLarge.style.borderColor = frameColor;
       
-      if (currentUserData.avatarType === 'image' && currentUserData.avatarUrl) {
-        avatarLarge.innerHTML = `<img src="${currentUserData.avatarUrl}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" onerror="this.innerHTML='<span>👤</span>'">`;
+      if (userData.avatarType === 'image' && userData.avatarUrl) {
+        avatarLarge.innerHTML = `<img src="${userData.avatarUrl}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" onerror="this.innerHTML='<span>👤</span>'">`;
       } else {
-        avatarLarge.innerHTML = `<span>${currentUserData.emoji || '😎'}</span>`;
+        avatarLarge.innerHTML = `<span>${userData.emoji || '😎'}</span>`;
       }
     }
     
+    // تحديث المعرف
     document.getElementById('profileIdBadge').innerHTML = 
-      `<i class="fas fa-id-card"></i> #${currentUserData.userId || currentUser?.uid?.slice(0, 6)}`;
+      `<i class="fas fa-id-card"></i> #${userData.userId || '000000'}`;
     
-    document.getElementById('editUsername').value = currentUserData.username || '';
-    document.getElementById('editEmail').value = currentUser.email || '';
-    document.getElementById('editBio').value = currentUserData.bio || '';
-    document.getElementById('editRelationship').value = currentUserData.relationship || 'اعزب';
+    // تحديث الحقول
+    document.getElementById('editUsername').value = userData.username || '';
+    document.getElementById('editEmail').value = userData.email || '';
+    document.getElementById('editBio').value = userData.bio || '';
+    document.getElementById('editRelationship').value = userData.relationship || 'اعزب';
     
-    document.getElementById('editFrameColor').value = currentUserData.colors?.frame || '#fbbf24';
-    document.getElementById('editNameColor').value = currentUserData.colors?.name || '#0f172a';
-    document.getElementById('editIdColor').value = currentUserData.colors?.id || '#8b5cf6';
-    document.getElementById('editPostTextColor').value = currentUserData.colors?.postText || '#334155';
-    document.getElementById('editCommentTextColor').value = currentUserData.colors?.commentText || '#475569';
+    // تحديث الألوان
+    document.getElementById('editFrameColor').value = userData.colors?.frame || '#fbbf24';
+    document.getElementById('editNameColor').value = userData.colors?.name || '#0f172a';
+    document.getElementById('editIdColor').value = userData.colors?.id || '#8b5cf6';
+    document.getElementById('editPostTextColor').value = userData.colors?.postText || '#334155';
+    document.getElementById('editCommentTextColor').value = userData.colors?.commentText || '#475569';
     
-    document.getElementById('privacyToggle').checked = currentUserData.isPrivate || false;
+    // تحديث الخصوصية
+    document.getElementById('privacyToggle').checked = userData.isPrivate || false;
     updatePrivacyStatus();
     
+    // تحديث الصورة المختارة
+    selectedAvatarType = userData.avatarType || 'emoji';
+    selectedAvatarValue = userData.avatarUrl || userData.emoji || '😎';
+    renderAvatarSelector();
+    
+    // تحديث زر الدعوة
     toggleInviteButton();
     
-    updateFollowersCount();
-    
-    selectedAvatarType = currentUserData.avatarType || 'emoji';
-    selectedAvatarValue = currentUserData.avatarUrl || currentUserData.emoji || '😎';
-    renderAvatarSelector();
+    console.log('✅ تم تحديث الواجهة بالبيانات:', userData.username);
+  }
+
+  function updateUI() {
+    if (!currentUserData) return;
+    updateUIWithData(currentUserData);
   }
 
   function updatePrivacyStatus() {
@@ -1288,6 +1277,7 @@
       }
       
       updateUI();
+      updateFollowersCount();
     } catch (error) {
       console.error("خطأ في تحميل البيانات:", error);
     }
@@ -1553,7 +1543,6 @@
     }
   };
 
-  // ========== حفظ جميع التعديلات ==========
   window.saveAllChanges = async function() {
     if (!currentUser) {
       showToast('يجب تسجيل الدخول', false);
@@ -1629,7 +1618,6 @@
         }
       }
       
-      // حفظ في Firestore
       await setDoc(doc(db, "users", currentUser.uid), currentUserData, { merge: true });
       
       // حفظ في localStorage للمزامنة الفورية
@@ -1646,6 +1634,8 @@
 
   window.handleLogout = async function() {
     try {
+      // مسح البيانات المحلية
+      localStorage.removeItem('currentUserData');
       await signOut(auth);
       showToast('تم تسجيل الخروج بنجاح');
       setTimeout(() => window.location.reload(), 1500);
@@ -1658,9 +1648,33 @@
   window.openModal = openModal;
   window.showToast = showToast;
 
+  // ========== تحميل البيانات من localStorage فوراً ==========
+  function loadLocalDataImmediately() {
+    try {
+      const savedData = localStorage.getItem('currentUserData');
+      if (savedData) {
+        const userData = JSON.parse(savedData);
+        console.log('📦 تم تحميل البيانات المحلية:', userData.username);
+        
+        // تحديث الواجهة مباشرة
+        updateUIWithData(userData);
+        
+        return userData;
+      } else {
+        console.log('⚠️ لا توجد بيانات محفوظة في localStorage');
+      }
+    } catch (error) {
+      console.error('❌ خطأ في تحميل البيانات المحلية:', error);
+    }
+    return null;
+  }
+
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       currentUser = user;
+      console.log('👤 تم تسجيل الدخول:', user.email);
+      
+      // تحميل البيانات من السيرفر
       await loadUserData(user.uid);
       
       if (!currentUserData?.userId) {
@@ -1668,12 +1682,33 @@
         currentUserData = { ...currentUserData, userId: userId };
         await setDoc(doc(db, "users", user.uid), currentUserData, { merge: true });
       }
+      
+      // حفظ البيانات في localStorage
+      if (currentUserData) {
+        localStorage.setItem('currentUserData', JSON.stringify(currentUserData));
+      }
     } else {
-      showToast('يرجى تسجيل الدخول', false);
+      console.log('⚠️ لم يتم تسجيل الدخول - محاولة تحميل البيانات المحلية');
+      
+      // تحميل البيانات من localStorage حتى لو لم يكن مسجل دخول
+      const localData = loadLocalDataImmediately();
+      if (localData) {
+        currentUserData = localData;
+        updateUIWithData(localData);
+        showToast('📂 تم تحميل البيانات المحلية');
+      } else {
+        showToast('يرجى تسجيل الدخول', false);
+      }
     }
   });
 
+  // تحميل البيانات المحلية فور تحميل الصفحة
   window.addEventListener('load', () => {
+    console.log('🔄 جاري تحميل الصفحة...');
+    
+    // تحميل البيانات من localStorage فوراً
+    loadLocalDataImmediately();
+    
     document.querySelectorAll('.close-btn').forEach(btn => {
       btn.addEventListener('click', function() {
         this.closest('.modal-overlay')?.classList.remove('active');
@@ -1688,6 +1723,22 @@
     
     document.getElementById('avatarPopup')?.addEventListener('click', function(e) {
       if (e.target === this) this.classList.remove('active');
+    });
+    
+    // الاستماع لتغييرات localStorage من الصفحات الأخرى
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'currentUserData' && e.newValue) {
+        console.log('🔄 تم تحديث البيانات من صفحة أخرى');
+        try {
+          const newData = JSON.parse(e.newValue);
+          updateUIWithData(newData);
+          if (currentUserData) {
+            currentUserData = { ...currentUserData, ...newData };
+          }
+        } catch (error) {
+          console.error('خطأ في مزامنة البيانات:', error);
+        }
+      }
     });
   });
 </script>
